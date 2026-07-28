@@ -23,10 +23,7 @@ $isAdmin = function_exists('checkAdmin') && checkAdmin();
             <a href="<?= e(url('index.php')) ?>" class="rounded-md px-3 py-2 text-ink/80 transition hover:bg-moss/10 hover:text-moss">
                 Home
             </a>
-            <a href="<?= e(url('index.php')) ?>#categories" class="rounded-md px-3 py-2 text-ink/80 transition hover:bg-moss/10 hover:text-moss">
-                Categories
-            </a>
-            <a href="<?= e(url('index.php')) ?>#products" class="rounded-md px-3 py-2 text-ink/80 transition hover:bg-moss/10 hover:text-moss">
+            <a href="<?= e(url('customer/products.php')) ?>" class="rounded-md px-3 py-2 text-ink/80 transition hover:bg-moss/10 hover:text-moss">
                 Products
             </a>
 
@@ -34,6 +31,12 @@ $isAdmin = function_exists('checkAdmin') && checkAdmin();
                 <?php if ($isAdmin): ?>
                     <a href="<?= e(url('admin/dashboard.php')) ?>" class="rounded-md px-3 py-2 text-ink/80 transition hover:bg-moss/10 hover:text-moss">
                         Dashboard
+                    </a>
+                    <a href="<?= e(url('admin/categories/index.php')) ?>" class="rounded-md px-3 py-2 text-ink/80 transition hover:bg-moss/10 hover:text-moss">
+                        Categories
+                    </a>
+                    <a href="<?= e(url('admin/products/index.php')) ?>" class="rounded-md px-3 py-2 text-ink/80 transition hover:bg-moss/10 hover:text-moss">
+                        Products
                     </a>
                     <a href="<?= e(url('admin/logout.php')) ?>" class="rounded-md bg-ink px-3 py-2 text-sand transition hover:bg-moss">
                         Logout

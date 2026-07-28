@@ -7,12 +7,19 @@ declare(strict_types=1);
 
 require dirname(__DIR__) . '/config/config.php';
 require dirname(__DIR__) . '/config/session.php';
+require dirname(__DIR__) . '/config/database.php';
 require dirname(__DIR__) . '/includes/functions.php';
 require dirname(__DIR__) . '/includes/auth.php';
 
 requireAdmin();
 
 $user = currentUser();
+
+$counts = [
+    'categories' => (int) db()->query('SELECT COUNT(*) FROM categories')->fetchColumn(),
+    'products'   => (int) db()->query('SELECT COUNT(*) FROM products')->fetchColumn(),
+];
+
 $pageTitle = 'Admin Dashboard — ' . SITE_NAME;
 require dirname(__DIR__) . '/includes/header.php';
 ?>
@@ -35,11 +42,17 @@ require dirname(__DIR__) . '/includes/header.php';
     </div>
 
     <div class="mt-10 grid gap-4 sm:grid-cols-2">
-        <div class="border border-dashed border-ink/20 bg-white/50 px-5 py-6">
-            <p class="text-sm font-semibold text-ink/40">Coming next</p>
-            <p class="mt-2 text-ink/70">Product &amp; category management will appear here in a later phase.</p>
-        </div>
-        <div class="border border-dashed border-ink/20 bg-white/50 px-5 py-6">
+        <a href="<?= e(url('admin/categories/index.php')) ?>" class="border border-ink/10 bg-white/70 px-5 py-6 transition hover:border-moss/40 hover:bg-white">
+            <p class="text-sm font-semibold uppercase tracking-wider text-ink/45">Categories</p>
+            <p class="mt-2 font-display text-3xl font-semibold text-moss"><?= e((string) $counts['categories']) ?></p>
+            <p class="mt-2 text-sm text-ink/65">Manage product categories</p>
+        </a>
+        <a href="<?= e(url('admin/products/index.php')) ?>" class="border border-ink/10 bg-white/70 px-5 py-6 transition hover:border-moss/40 hover:bg-white">
+            <p class="text-sm font-semibold uppercase tracking-wider text-ink/45">Products</p>
+            <p class="mt-2 font-display text-3xl font-semibold text-moss"><?= e((string) $counts['products']) ?></p>
+            <p class="mt-2 text-sm text-ink/65">Manage catalog products</p>
+        </a>
+        <div class="border border-dashed border-ink/20 bg-white/50 px-5 py-6 sm:col-span-2">
             <p class="text-sm font-semibold text-ink/40">Coming next</p>
             <p class="mt-2 text-ink/70">Orders and reporting will appear here in a later phase.</p>
         </div>
